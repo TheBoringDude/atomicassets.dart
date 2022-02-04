@@ -3,6 +3,6 @@
 /// More dartdocs go here.
 library atomicassets;
 
-export 'src/atomicassets_base.dart';
+export 'src/atomicassets.dart';
 
 // TODO: Export any libraries intended for clients of this package.
