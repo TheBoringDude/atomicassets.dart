@@ -91,4 +91,17 @@ class AtomicAssets {
 
     return await _get<List<dynamic>>(url);
   }
+
+  /// Fetch asset by id.
+  ///
+  /// Endpoint: `/v1/assets/{asset_id}`
+  Future<BaseAPIResponse<Map<String, dynamic>>> getAssetID(String id) async {
+    if (id == "") {
+      throw Exception("Required params: [id]");
+    }
+
+    var url = "assets/$id";
+
+    return await _get<Map<String, dynamic>>(url);
+  }
 }

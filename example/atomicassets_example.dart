@@ -4,6 +4,8 @@ void main() async {
   var aa = AtomicAssets("https://wax.api.atomicassets.io");
 
   var data = await aa.getAssets();
+  print(data.data?[0]);
 
-  print(data.data);
+  var nft = await aa.getAssetID("1099596594113");
+  print(nft.data);
 }
