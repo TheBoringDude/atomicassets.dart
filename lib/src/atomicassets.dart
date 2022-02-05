@@ -150,4 +150,18 @@ class AtomicAssets {
 
     return await _get<List<dynamic>>(url);
   }
+
+  /// Fetch collection by its name.
+  ///
+  /// Endpoint: `/v1/collections/{collection_name}`
+  Future<BaseAPIResponse<Map<String, dynamic>>> getCollectionName(
+      String collectionName) async {
+    if (collectionName == "") {
+      throw Exception("Required params: [collectionName]");
+    }
+
+    var url = "collections/$collectionName";
+
+    return await _get<Map<String, dynamic>>(url);
+  }
 }
