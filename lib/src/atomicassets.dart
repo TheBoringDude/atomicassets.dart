@@ -104,4 +104,50 @@ class AtomicAssets {
 
     return await _get<Map<String, dynamic>>(url);
   }
+
+  /// Fetch collections.
+  ///
+  /// Endpoint: `/v1/collections`
+  Future<BaseAPIResponse<List<dynamic>>> getCollections(
+      {String? author,
+      String? match,
+      String? authorizedAccount,
+      String? notifyAccount,
+      String? collectionBlacklist,
+      String? collectionWhitelist,
+      String? ids,
+      String? lowerBound,
+      String? upperBound,
+      int? before,
+      int? after,
+      int? page,
+      int? limit,
+      String? order,
+      String? sort}) async {
+    var url = "collections";
+
+    var params = parseParams({
+      "author": author,
+      "match": match,
+      "authorized_account": authorizedAccount,
+      "notify_account": notifyAccount,
+      "collection_blacklist": collectionBlacklist,
+      "collection_whitelist": collectionWhitelist,
+      "ids": ids,
+      "lower_bound": lowerBound,
+      "upper_bound": upperBound,
+      "before": before,
+      "after": after,
+      "page": page,
+      "limit": limit,
+      "order": order,
+      "sort": sort,
+    });
+
+    if (params != "") {
+      url += "?$params";
+    }
+
+    return await _get<List<dynamic>>(url);
+  }
 }
