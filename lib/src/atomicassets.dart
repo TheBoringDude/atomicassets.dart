@@ -224,4 +224,78 @@ class AtomicAssets {
 
     return await _get<Map<String, dynamic>>(url);
   }
+
+  /// Fetch templates.
+  ///
+  /// Endpoint: `/v1/templates`
+  Future<BaseAPIResponse<List<dynamic>>> getTemplates(
+      {String? collectionName,
+      String? schemaName,
+      int? issuedSuply,
+      int? minIssuedSupply,
+      int? maxIssuedSupply,
+      bool? hasAssets,
+      int? maxSupply,
+      bool? isBurnable,
+      bool? isTransferable,
+      String? authorizedAccount,
+      String? match,
+      String? collectionBlacklist,
+      String? collectionWhitelist,
+      String? ids,
+      String? lowerBound,
+      String? upperBound,
+      int? before,
+      int? after,
+      int? page,
+      int? limit,
+      String? order,
+      String? sort}) async {
+    var url = "schemas";
+
+    var params = parseParams({
+      "collection_name": collectionName,
+      "schema_name": schemaName,
+      "issued_supply": issuedSuply,
+      "min_issued_supply": minIssuedSupply,
+      "max_issued_supply": maxIssuedSupply,
+      "has_assets": hasAssets,
+      "max_supply": maxSupply,
+      "is_burnable": isBurnable,
+      "is_transferable": isTransferable,
+      "match": match,
+      "authorized_account": authorizedAccount,
+      "collection_blacklist": collectionBlacklist,
+      "collection_whitelist": collectionWhitelist,
+      "ids": ids,
+      "lower_bound": lowerBound,
+      "upper_bound": upperBound,
+      "before": before,
+      "after": after,
+      "page": page,
+      "limit": limit,
+      "order": order,
+      "sort": sort,
+    });
+
+    if (params != "") {
+      url += "?$params";
+    }
+
+    return await _get<List<dynamic>>(url);
+  }
+
+  /// Find template by id.
+  ///
+  /// Endpoint: `/v1/templates/{collection_name}/{template_id}`
+  Future<BaseAPIResponse<Map<String, dynamic>>> getTemplateID(
+      {required String collectionName, required int templateID}) async {
+    if (collectionName == "" || templateID == 0) {
+      throw Exception("Required params: [collectionName] and [templateID]");
+    }
+
+    var url = "templates/$collectionName/$templateID";
+
+    return await _get<Map<String, dynamic>>(url);
+  }
 }
