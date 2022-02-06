@@ -164,4 +164,64 @@ class AtomicAssets {
 
     return await _get<Map<String, dynamic>>(url);
   }
+
+  /// Fetch schemas.
+  ///
+  /// Endpoint: `/v1/schemas`
+  Future<BaseAPIResponse<List<dynamic>>> getSchemas(
+      {String? collectionName,
+      String? authorizedAccount,
+      String? schemaName,
+      String? match,
+      String? collectionBlacklist,
+      String? collectionWhitelist,
+      String? ids,
+      String? lowerBound,
+      String? upperBound,
+      int? before,
+      int? after,
+      int? page,
+      int? limit,
+      String? order,
+      String? sort}) async {
+    var url = "schemas";
+
+    var params = parseParams({
+      "collection_name": collectionName,
+      "schema_name": schemaName,
+      "match": match,
+      "authorized_account": authorizedAccount,
+      "collection_blacklist": collectionBlacklist,
+      "collection_whitelist": collectionWhitelist,
+      "ids": ids,
+      "lower_bound": lowerBound,
+      "upper_bound": upperBound,
+      "before": before,
+      "after": after,
+      "page": page,
+      "limit": limit,
+      "order": order,
+      "sort": sort,
+    });
+
+    if (params != "") {
+      url += "?$params";
+    }
+
+    return await _get<List<dynamic>>(url);
+  }
+
+  /// Fetch collection by schema_name.
+  ///
+  /// Endpoint: `/v1/schemas/{collection_name}/{schema_name}`
+  Future<BaseAPIResponse<Map<String, dynamic>>> getSchemaName(
+      {required String collectionName, required String schemaName}) async {
+    if (collectionName == "" || schemaName == "") {
+      throw Exception("Required params: [collectionName] and [schemaNAme]");
+    }
+
+    var url = "schemas/$collectionName/$schemaName";
+
+    return await _get<Map<String, dynamic>>(url);
+  }
 }
